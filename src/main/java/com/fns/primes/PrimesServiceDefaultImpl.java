@@ -21,7 +21,7 @@ public class PrimesServiceDefaultImpl implements PrimesService {
         return Sets.newTreeSet(LongStream.rangeClosed(start, end).filter(i -> isPrime(i)).boxed().collect(Collectors.toSet()));
     }
 
-    public boolean isPrime(long number) {
+    protected boolean isPrime(long number) {
         return number > 1 &&  
                 LongStream
                  .rangeClosed(2, (long) Math.sqrt(number))
