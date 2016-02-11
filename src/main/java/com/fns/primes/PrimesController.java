@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +24,6 @@ public class PrimesController {
     
     @RequestMapping(value="/primes/{start}/{end}", method = RequestMethod.GET)
     public ResponseEntity<?> getPrimes(@PathVariable("start") Long start, @PathVariable("end") Long end) {
-        Assert.isTrue(end >= start);
         Map<String, Object> response = ImmutableSortedMap.of("start", start, "end", end, "primes", service.getPrimes(start, end));
         return ResponseEntity.ok(response);
     }
