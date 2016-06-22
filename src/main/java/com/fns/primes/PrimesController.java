@@ -1,8 +1,6 @@
 package com.fns.primes;
 
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
+import com.google.common.collect.ImmutableMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.google.common.collect.ImmutableSortedMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 public class PrimesController {
@@ -24,7 +24,8 @@ public class PrimesController {
     
     @RequestMapping(value="/primes/{start}/{end}", method = RequestMethod.GET)
     public ResponseEntity<?> getPrimes(@PathVariable("start") Long start, @PathVariable("end") Long end) {
-        Map<String, Object> response = ImmutableSortedMap.of("start", start, "end", end, "primes", service.getPrimes(start, end));
+        Map<String, Object> response = ImmutableMap.of("start", start, "end", end, "primes",
+                service.getPrimes(start, end));
         return ResponseEntity.ok(response);
     }
     
