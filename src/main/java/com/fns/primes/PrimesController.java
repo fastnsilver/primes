@@ -31,7 +31,7 @@ public class PrimesController {
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<?> badRequest(IllegalArgumentException exception, HttpServletRequest request) {
         return ResponseEntity.badRequest().body(
-                ImmutableMap.of("uri", request.getQueryString(), 
+                ImmutableMap.of("uri", request.getRequestURI(), 
                         "error", exception.getMessage()));
     }
     
