@@ -18,7 +18,12 @@ public class PrimesServiceDefaultImpl implements PrimesService {
         Assert.notNull(start, "Start value cannot be null!");
         Assert.notNull(end, "End value cannot be null!");
         Assert.isTrue(end >= start, "End value must be greater than or equal to start value!");
-        return Sets.newTreeSet(LongStream.rangeClosed(start, end).filter(i -> isPrime(i)).boxed().collect(Collectors.toSet()));
+        return Sets.newTreeSet(
+                LongStream
+                    .rangeClosed(start, end)
+                    .filter(i -> isPrime(i))
+                    .boxed()
+                    .collect(Collectors.toSet()));
     }
 
     protected boolean isPrime(long number) {
@@ -37,8 +42,9 @@ public class PrimesServiceDefaultImpl implements PrimesService {
             long end = s.nextLong();
             Assert.isTrue(start <= end);
             System.out.println("List of prime numbers between " + start + " and " + end);
-            PrimesService impl = new PrimesServiceDefaultImpl();
-            impl.getPrimes(start, end).forEach(v -> System.out.println(v));
+            (new PrimesServiceDefaultImpl())
+                .getPrimes(start, end)
+                .forEach(v -> System.out.println(v));
         } catch (IllegalArgumentException iae) {
             System.err.println("Start value must be less than or equal to end value!");
         }
