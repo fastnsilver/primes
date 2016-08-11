@@ -1,0 +1,4 @@
+{
+	"uri": "/primes/100/1",
+	"error": "End value must be greater than or equal to start value!"
+}

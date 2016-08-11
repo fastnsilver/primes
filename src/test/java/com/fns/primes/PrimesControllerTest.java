@@ -5,9 +5,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Set;
+import com.google.common.collect.Sets;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +18,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.google.common.collect.Sets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Set;
 
 
 public class PrimesControllerTest {
@@ -53,6 +53,20 @@ public class PrimesControllerTest {
                     .contentType(MediaType.APPLICATION_JSON)
             )
             .andExpect(status().isOk())
+            .andExpect(content().json(response));
+    }
+
+    @Test
+    public void testBadRequest() throws Exception {
+        Resource r = resolver.getResource("classpath:bad-result.json");
+        byte[] encoded = Files.readAllBytes(Paths.get(r.getURI()));
+        String response = new String(encoded, "UTF-8");
+        when(service.getPrimes(100L, 1L)).thenCallRealMethod();
+        mockMvc.perform(
+                get("/primes/100/1")
+                    .contentType(MediaType.APPLICATION_JSON)
+            )
+            .andExpect(status().isBadRequest())
             .andExpect(content().json(response));
     }
 }
