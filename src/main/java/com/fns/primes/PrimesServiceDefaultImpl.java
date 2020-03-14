@@ -2,13 +2,12 @@ package com.fns.primes;
 
 import java.util.Scanner;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-
-import com.google.common.collect.Sets;
 
 @Service
 public class PrimesServiceDefaultImpl implements PrimesService {
@@ -18,7 +17,7 @@ public class PrimesServiceDefaultImpl implements PrimesService {
         Assert.notNull(start, "Start value cannot be null!");
         Assert.notNull(end, "End value cannot be null!");
         Assert.isTrue(end >= start, "End value must be greater than or equal to start value!");
-        return Sets.newTreeSet(
+        return new TreeSet<Long>(
                 LongStream
                     .rangeClosed(start, end)
                     .filter(i -> isPrime(i))
@@ -27,20 +26,20 @@ public class PrimesServiceDefaultImpl implements PrimesService {
     }
 
     protected boolean isPrime(long number) {
-        return number > 1 &&  
+        return number > 1 &&
                 LongStream
                  .rangeClosed(2, (long) Math.sqrt(number))
                  .parallel()
                  .noneMatch(index -> number % index == 0);
     }
-    
+
     public static void main(String[] args) {
         try (Scanner s = new Scanner(System.in)) {;
             System.out.print("Enter the first number: ");
             long start = s.nextLong();
             System.out.print("Enter the second number: ");
             long end = s.nextLong();
-            Assert.isTrue(start <= end);
+            Assert.isTrue(start <= end, "Start of range must be less than or equal to end of range");
             System.out.println("List of prime numbers between " + start + " and " + end);
             (new PrimesServiceDefaultImpl())
                 .getPrimes(start, end)

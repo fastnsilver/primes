@@ -1,10 +1,12 @@
-target/
+build/
+bin/
+.gradle/
 release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
-.mvn/
 .history/
 .classpath
 .project
 .factorypath
 .settings/
+logs/
