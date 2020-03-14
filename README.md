@@ -1,4 +1,6 @@
-== Primes Service
+# Primes Service
+
+This repository is meant to be a programming challenge.
 
 Given 2 numbers, a start value and an end value, calculate all the possible prime numbers between them.
 
