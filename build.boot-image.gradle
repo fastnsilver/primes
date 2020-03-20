@@ -1,12 +1,19 @@
 plugins {
+    id 'com.gorylenko.gradle-git-properties' version '2.2.2'
     id 'org.springframework.boot' version '2.3.0.M3'
     id 'io.spring.dependency-management' version '1.0.9.RELEASE'
     id 'com.github.ben-manes.versions' version '0.28.0'
 	id 'java'
     id 'jacoco'
     id 'com.google.cloud.tools.jib' version '2.1.0'
+    id 'maven-publish'
     id 'com.github.spotbugs' version '4.0.4'
     id 'info.solidsoft.pitest' version '1.4.7'
+}
+
+gitProperties {
+    dateFormat = "yyyy-MM-dd'T'HH:mmZ"
+    dateFormatTimeZone = "UTC"
 }
 
 spotbugs {
@@ -107,6 +114,52 @@ dependencies {
     testImplementation('org.pitest:pitest-junit5-plugin:0.12')
 }
 
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            versionMapping {
+                usage('java-api') {
+                    fromResolutionOf('runtimeClasspath')
+                }
+                usage('java-runtime') {
+                    fromResolutionResult()
+                }
+            }
+            pom {
+                name = 'primes'
+                url = 'https://github.com/fastnsilver/primes'
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'fastnsilver'
+                        name = 'Chris Phillipson'
+                        email = 'fastnsilver@gmail.com'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/fastnsilver/primes.git'
+                    developerConnection = 'scm:git:ssh://github.com/fastnsilver/primes.git'
+                    url = 'https://github.com/fastnsilver/primes'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            // change URLs to point to your repos, e.g. http://my.org/repo
+            def releasesRepoUrl = "$buildDir/repos/releases"
+            def snapshotsRepoUrl = "$buildDir/repos/snapshots"
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+        }
+    }
+}
+
 javadoc {
     failOnError = false
     if(JavaVersion.current().isJava9Compatible()) {
@@ -118,3 +171,4 @@ bootJar.enabled = true
 jar.enabled = false
 
 test.finalizedBy jacocoTestReport
+build.finalizedBy publishToMavenLocal, bootBuildImage
