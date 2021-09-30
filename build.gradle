@@ -1,16 +1,16 @@
 plugins {
-    id 'org.springframework.boot' version '2.3.0.M3'
-    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
-    id 'com.github.ben-manes.versions' version '0.28.0'
+    id 'org.springframework.boot' version '2.5.4'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'com.github.ben-manes.versions' version '0.39.0'
 	id 'java'
     id 'jacoco'
-    id 'com.google.cloud.tools.jib' version '2.1.0'
-    id 'com.github.spotbugs' version '4.0.4'
-    id 'info.solidsoft.pitest' version '1.4.7'
+    id 'com.google.cloud.tools.jib' version '3.1.4'
+    id 'com.github.spotbugs' version '4.7.3'
+    id 'info.solidsoft.pitest' version '1.6.0'
 }
 
 spotbugs {
-    toolVersion = '4.0.0-beta1'
+    toolVersion = '4.2.3'
     ignoreFailures = true
     effort = 'max'
     reportLevel = 'low'
@@ -69,7 +69,7 @@ java {
 }
 
 jacoco {
-	toolVersion = "0.8.5"
+	toolVersion = "0.8.7"
 }
 
 jacocoTestReport {
@@ -93,8 +93,8 @@ dependencies {
     implementation('org.springframework.boot:spring-boot-starter-actuator')
     implementation('org.springframework.boot:spring-boot-starter-web')
     implementation('org.springframework.boot:spring-boot-starter-log4j2')
-    implementation('com.lmax:disruptor:3.4.2')
-    testImplementation('org.assertj:assertj-core:3.15.0')
+    implementation('com.lmax:disruptor:3.4.4')
+    testImplementation('org.assertj:assertj-core:3.20.2')
     testImplementation('org.junit.jupiter:junit-jupiter-api')
     testImplementation('org.junit.jupiter:junit-jupiter-params')
     testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine')
