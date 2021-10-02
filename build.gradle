@@ -2,7 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.5.4'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'com.github.ben-manes.versions' version '0.39.0'
-	id 'java'
+    id 'java'
     id 'jacoco'
     id 'com.google.cloud.tools.jib' version '3.1.4'
     id 'com.github.spotbugs' version '4.7.3'
@@ -35,9 +35,9 @@ version = '1.0-SNAPSHOT'
 sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
-	mavenCentral()
+    mavenCentral()
     maven { url "https://repo.spring.io/snapshot" }
-	maven { url "https://repo.spring.io/milestone" }
+    maven { url "https://repo.spring.io/milestone" }
     maven { url "https://jitpack.io" }
 }
 
@@ -48,19 +48,19 @@ bootRun {
 }
 
 configurations {
-	// exclude Logback
+    // exclude Logback
     implementation.exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
 }
 
 test {
-	useJUnitPlatform()
-	testLogging {
-		events "passed", "skipped", "failed"
+    useJUnitPlatform()
+    testLogging {
+	events "passed", "skipped", "failed"
         exceptionFormat "full"
         showCauses true
         showExceptions true
         showStackTraces true
-	}
+    }
 }
 
 java {
@@ -69,15 +69,15 @@ java {
 }
 
 jacoco {
-	toolVersion = "0.8.7"
+    toolVersion = "0.8.7"
 }
 
 jacocoTestReport {
-	reports {
-		xml.enabled = true
-		html.enabled = true
-		csv.enabled = false
-	}
+    reports {
+	xml.enabled = true
+	html.enabled = true
+	csv.enabled = false
+    }
 }
 
 pitest {
@@ -95,6 +95,7 @@ dependencies {
     implementation('org.springframework.boot:spring-boot-starter-log4j2')
     implementation('com.lmax:disruptor:3.4.4')
     runtimeOnly('com.wavefront:wavefront-spring-boot-starter:2.2.0')
+    runtimeOnly('io.opentracing.contrib:opentracing-spring-cloud-starter:0.5.9')
     testImplementation('org.assertj:assertj-core:3.20.2')
     testImplementation('org.junit.jupiter:junit-jupiter-api')
     testImplementation('org.junit.jupiter:junit-jupiter-params')
@@ -103,7 +104,7 @@ dependencies {
     testImplementation('org.mockito:mockito-junit-jupiter')
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	    exclude group: 'junit', module: 'junit'
+	exclude group: 'junit', module: 'junit'
     }
     testImplementation('org.pitest:pitest-junit5-plugin:0.12')
 }
