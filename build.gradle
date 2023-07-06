@@ -1,11 +1,12 @@
 plugins {
-    id 'org.springframework.boot' version '3.0.2'
+    id 'org.springframework.boot' version '3.1.1'
     id 'io.spring.dependency-management' version '1.1.0'
-    id 'com.github.ben-manes.versions' version '0.45.0'
-	id 'java'
+    id 'com.github.ben-manes.versions' version '0.47.0'
+    id 'java'
     id 'jacoco'
-    id 'com.google.cloud.tools.jib' version '3.3.1'
-    id 'com.github.spotbugs' version '5.0.13'
+    id 'io.freefair.aggregate-jacoco-report' version '8.1.0'
+    id 'com.google.cloud.tools.jib' version '3.3.2'
+    id 'com.github.spotbugs' version '5.0.14'
     id 'info.solidsoft.pitest' version '1.9.11'
 }
 
@@ -34,9 +35,9 @@ version = '1.0-SNAPSHOT'
 sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
-	mavenCentral()
+    mavenCentral()
     maven { url "https://repo.spring.io/snapshot" }
-	maven { url "https://repo.spring.io/milestone" }
+    maven { url "https://repo.spring.io/milestone" }
     maven { url "https://jitpack.io" }
 }
 
@@ -47,19 +48,19 @@ bootRun {
 }
 
 configurations {
-	// exclude Logback
+    // exclude Logback
     implementation.exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
 }
 
 test {
-	useJUnitPlatform()
-	testLogging {
-		events "passed", "skipped", "failed"
+    useJUnitPlatform()
+    testLogging {
+	events "passed", "skipped", "failed"
         exceptionFormat "full"
         showCauses true
         showExceptions true
         showStackTraces true
-	}
+    }
 }
 
 java {
@@ -68,15 +69,7 @@ java {
 }
 
 jacoco {
-	toolVersion = "0.8.8"
-}
-
-jacocoTestReport {
-	reports {
-		xml.enabled = true
-		html.enabled = true
-		csv.enabled = false
-	}
+    toolVersion = "0.8.10"
 }
 
 pitest {
@@ -94,14 +87,10 @@ dependencies {
     testImplementation('org.assertj:assertj-core:3.24.2')
     testImplementation('org.junit.jupiter:junit-jupiter-api')
     testImplementation('org.junit.jupiter:junit-jupiter-params')
-    testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine')
     testImplementation('org.mockito:mockito-core')
     testImplementation('org.mockito:mockito-junit-jupiter')
-    testImplementation('org.springframework.boot:spring-boot-starter-test') {
-        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	    exclude group: 'junit', module: 'junit'
-    }
-    testImplementation('org.pitest:pitest-junit5-plugin:1.1.2')
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    testImplementation('org.pitest:pitest-junit5-plugin:1.2.0')
 }
 
 javadoc {
@@ -113,5 +102,3 @@ javadoc {
 
 bootJar.enabled = true
 jar.enabled = false
-
-test.finalizedBy jacocoTestReport
