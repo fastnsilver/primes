@@ -1,7 +1,7 @@
 plugins {
-    id 'org.springframework.boot' version '3.1.1'
-    id 'io.spring.dependency-management' version '1.1.0'
-    id 'com.github.ben-manes.versions' version '0.47.0'
+    id 'org.springframework.boot' version '2.6.15'
+    id 'io.spring.dependency-management' version '1.1.3'
+    id 'com.github.ben-manes.versions' version '0.49.0'
     id 'java'
     id 'jacoco'
     id 'io.freefair.aggregate-jacoco-report' version '8.1.0'
@@ -69,7 +69,7 @@ java {
 }
 
 jacoco {
-    toolVersion = "0.8.10"
+    toolVersion = "0.8.11"
 }
 
 pitest {
@@ -83,7 +83,7 @@ pitest {
 dependencies {
     implementation('org.springframework.boot:spring-boot-starter-actuator')
     implementation('org.springframework.boot:spring-boot-starter-web')
-    runtimeOnly('com.wavefront:wavefront-spring-boot-starter:3.0.1')
+    runtimeOnly('com.wavefront:wavefront-spring-boot-starter:3.0.2')
     testImplementation('org.assertj:assertj-core:3.24.2')
     testImplementation('org.junit.jupiter:junit-jupiter-api')
     testImplementation('org.junit.jupiter:junit-jupiter-params')
