@@ -17,12 +17,11 @@ public class PrimesServiceDefaultImpl implements PrimesService {
         Assert.notNull(start, "Start value cannot be null!");
         Assert.notNull(end, "End value cannot be null!");
         Assert.isTrue(end >= start, "End value must be greater than or equal to start value!");
-        return new TreeSet<Long>(
-                LongStream
-                    .rangeClosed(start, end)
-                    .filter(i -> isPrime(i))
-                    .boxed()
-                    .collect(Collectors.toSet()));
+        return LongStream
+                .rangeClosed(start, end)
+                .filter(this::isPrime)
+                .boxed()
+                .collect(Collectors.toCollection(TreeSet::new));
     }
 
     protected boolean isPrime(long number) {
@@ -34,7 +33,7 @@ public class PrimesServiceDefaultImpl implements PrimesService {
     }
 
     public static void main(String[] args) {
-        try (Scanner s = new Scanner(System.in)) {;
+        try (Scanner s = new Scanner(System.in)) {
             System.out.print("Enter the first number: ");
             long start = s.nextLong();
             System.out.print("Enter the second number: ");

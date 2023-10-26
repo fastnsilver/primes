@@ -4,10 +4,10 @@ plugins {
     id 'com.github.ben-manes.versions' version '0.49.0'
     id 'java'
     id 'jacoco'
-    id 'io.freefair.aggregate-jacoco-report' version '8.1.0'
+    id 'io.freefair.aggregate-jacoco-report' version '8.4'
     id 'com.google.cloud.tools.jib' version '3.3.2'
-    id 'com.github.spotbugs' version '5.0.14'
-    id 'info.solidsoft.pitest' version '1.9.11'
+    id 'com.github.spotbugs' version '5.2.1'
+    id 'info.solidsoft.pitest' version '1.15.0'
 }
 
 spotbugs {
@@ -47,11 +47,6 @@ bootRun {
     systemProperties = System.properties
 }
 
-configurations {
-    // exclude Logback
-    implementation.exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
-}
-
 test {
     useJUnitPlatform()
     testLogging {
@@ -83,14 +78,12 @@ pitest {
 dependencies {
     implementation('org.springframework.boot:spring-boot-starter-actuator')
     implementation('org.springframework.boot:spring-boot-starter-web')
-    runtimeOnly('com.wavefront:wavefront-spring-boot-starter:3.0.2')
     testImplementation('org.assertj:assertj-core:3.24.2')
-    testImplementation('org.junit.jupiter:junit-jupiter-api')
-    testImplementation('org.junit.jupiter:junit-jupiter-params')
-    testImplementation('org.mockito:mockito-core')
-    testImplementation('org.mockito:mockito-junit-jupiter')
     testImplementation('org.springframework.boot:spring-boot-starter-test')
-    testImplementation('org.pitest:pitest-junit5-plugin:1.2.0')
+    testImplementation('org.pitest:pitest-junit5-plugin:1.2.1')
+    if (project.hasProperty("isObserved")) {
+        runtimeOnly('com.wavefront:wavefront-spring-boot-starter:3.0.2')
+    }
 }
 
 javadoc {
@@ -99,6 +92,3 @@ javadoc {
         options.addBooleanOption('html5', true)
     }
 }
-
-bootJar.enabled = true
-jar.enabled = false
