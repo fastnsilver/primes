@@ -75,6 +75,12 @@ pitest {
     outputFormats = ['XML', 'HTML']
 }
 
+dependencyManagement {
+    imports {
+        mavenBom "com.wavefront:wavefront-spring-boot-bom:2.3.4"
+    }
+}
+
 dependencies {
     implementation('org.springframework.boot:spring-boot-starter-actuator')
     implementation('org.springframework.boot:spring-boot-starter-web')
@@ -82,7 +88,8 @@ dependencies {
     testImplementation('org.springframework.boot:spring-boot-starter-test')
     testImplementation('org.pitest:pitest-junit5-plugin:1.2.1')
     if (project.hasProperty("isObserved")) {
-        runtimeOnly('com.wavefront:wavefront-spring-boot-starter:3.0.2')
+        runtimeOnly('com.wavefront:wavefront-spring-boot-starter')
+        implementation('io.opentracing.contrib:opentracing-spring-cloud-starter:0.5.7')
     }
 }
 
