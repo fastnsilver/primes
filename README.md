@@ -78,12 +78,6 @@ gradle bootRun
 ```
 > Press Ctrl+c to stop
 
-With native image
-
-```
-./build/native/nativeCompile/primes
-```
-
 
 ## How to deploy
 
