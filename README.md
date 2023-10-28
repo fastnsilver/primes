@@ -118,6 +118,20 @@ rootProject {
 1. Save the above into a file named `init.gradle`.  This new file will be a sibling of `build.gradle`.
 2. Run `gradle --init-script init.gradle rewriteRun` to run the recipe.
 3. Inspect the results.
+4. Activate Java 17.  (See why in this [blog](https://spring.io/blog/2022/05/24/preparing-for-spring-boot-3-0)).
+
+```
+sdk install java 17.0.8.1-librca
+sdk use java 17.0.8.1-librca
+```
+
+5. Try to build without making one more manual edit, you will notice that the build fails on `spotbugsMain` task.
+
+```
+gradle clean build
+```
+
+6. Manually edit `build.gradle` and replace `id 'com.github.spotbugs' version '4.5.0'` with `id 'com.github.spotbugs' version '5.2.1'`, then save your changes, attempt another build, et voila!
 
 
 ## Roadmap
