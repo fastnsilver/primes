@@ -33,7 +33,7 @@ public class PrimesServiceDefaultImpl implements PrimesService {
     }
 
     public static void main(String[] args) {
-        try (Scanner s = new Scanner(System.in)) {
+        try (Scanner s = new Scanner(System.in, "UTF-8")) {
             System.out.print("Enter the first number: ");
             long start = s.nextLong();
             System.out.print("Enter the second number: ");

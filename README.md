@@ -1,7 +1,7 @@
 # Primes Service (Solution)
 
 This branch contains the solution to the challenge.
-The implementation has dependencies upon Spring Boot 2.6.x starters.
+The implementation has dependencies upon Spring Boot 2.1.x starters.
 
 ## The Challenge was...
 
@@ -31,24 +31,24 @@ Bonus points for authoring a Mock test that covers the Controller implementation
 ```
 git clone https://github.com/fastnsilver/primes.git
 cd primes
-git checkout 2.6
+git checkout 2.1
 ```
 
 
 ## Install prerequisites
 
 ```
-sdk install java 11.0.20.1-librca
-sdk install gradle 8.4
+sdk install java 8.0.372-librca
+sdk install gradle 6.9.4
 ```
 
 
 ## Set active JDK
 
 ```
-sdk use java 11.0.20.1-librca
+sdk use java 8.0.372-librca
 ```
-> Java 11
+> Java 8
 
 
 ## How to Build
@@ -56,17 +56,6 @@ sdk use java 11.0.20.1-librca
 ```
 gradle clean build
 ```
-
-### Alternative builds
-
-with Wavefront
-* adds a dependency on [wavefront-springboot-starter](https://docs.wavefront.com/wavefront_springboot3.html)
-* you will also need to update key-value pairs in [application.properties](src/main/resources/application.properties)
-
-```
-gradle clean build -PisObserved
-```
-> Export metrics and traces to Wavefront
 
 
 ## How to Run
@@ -77,12 +66,6 @@ With JRE
 gradle bootRun
 ```
 > Press Ctrl+c to stop
-
-With native image
-
-```
-./build/native/nativeCompile/primes
-```
 
 
 ## How to deploy

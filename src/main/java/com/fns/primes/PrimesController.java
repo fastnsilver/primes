@@ -1,5 +1,6 @@
 package com.fns.primes;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,17 +23,20 @@ public class PrimesController {
 
     @RequestMapping(value="/primes/{start}/{end}", method = RequestMethod.GET)
     public ResponseEntity<?> getPrimes(@PathVariable("start") Long start, @PathVariable("end") Long end) {
-        return ResponseEntity.ok(
-                Map.of("start", start, "end", end,
-                        "primes", service.getPrimes(start, end)));
+        Map<String, Object> body = new HashMap<>();
+        body.put("start", start);
+        body.put("end", end);
+        body.put("primes", service.getPrimes(start, end));
+        return ResponseEntity.ok(body);
     }
 
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<?> badRequest(IllegalArgumentException exception, HttpServletRequest request) {
-        return ResponseEntity.badRequest().body(
-                Map.of("uri", request.getRequestURI(),
-                        "error", exception.getMessage()));
+        Map<String, Object> body = new HashMap<>();
+        body.put("uri", request.getRequestURI());
+        body.put("error", exception.getMessage());
+        return ResponseEntity.badRequest().body(body);
     }
 
 }
