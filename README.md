@@ -39,7 +39,7 @@ git checkout 2.1
 
 ```
 sdk install java 8.0.372-librca
-sdk install gradle 6.9.4
+sdk install gradle 7.6.1
 ```
 
 
