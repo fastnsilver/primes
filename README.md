@@ -31,7 +31,7 @@ Bonus points for authoring a Mock test that covers the Controller implementation
 ```
 git clone https://github.com/fastnsilver/primes.git
 cd primes
-git checkout 2.6.15
+git checkout 2.6
 ```
 
 
