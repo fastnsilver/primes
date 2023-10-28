@@ -39,7 +39,7 @@ git checkout 2.6
 
 ```
 sdk install java 11.0.20.1-librca
-sdk install gradle 8.4
+sdk install gradle 8.2
 ```
 
 
@@ -60,7 +60,7 @@ gradle clean build
 ### Alternative builds
 
 with Wavefront
-* adds a dependency on [wavefront-springboot-starter](https://docs.wavefront.com/wavefront_springboot3.html)
+* adds a dependency on [wavefront-springboot-starter](https://docs.wavefront.com/wavefront_springboot.html)
 * you will also need to update key-value pairs in [application.properties](src/main/resources/application.properties)
 
 ```
