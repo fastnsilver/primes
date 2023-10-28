@@ -84,6 +84,42 @@ from Tanzu Application Service
 cf delete primes -f
 ```
 
+
+## How to upgrade to latest available Java LTS and Spring Boot
+
+We'll start with [this recipe](https://docs.openrewrite.org/recipes/java/spring/boot3/upgradespringboot_3_1) from OpenRewrite and activate one more recipe to upgrade this out-dated setup to the latest without tinkering with the source yourself
+
+```
+initscript {
+    repositories {
+        maven { url "https://plugins.gradle.org/m2" }
+    }
+    dependencies { classpath("org.openrewrite:plugin:6.4.2") }
+}
+rootProject {
+    plugins.apply(org.openrewrite.gradle.RewritePlugin)
+    dependencies {
+        rewrite("org.openrewrite.recipe:rewrite-spring:5.0.11")
+    }
+    rewrite {
+        activeRecipe("org.openrewrite.java.spring.boot2.SpringBoot2JUnit4to5Migration")
+        activeRecipe("org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_1")
+    }
+    afterEvaluate {
+        if (repositories.isEmpty()) {
+            repositories {
+                mavenCentral()
+            }
+        }
+    }
+}
+```
+
+1. Save the above into a file named `init.gradle`.  This new file will be a sibling of `build.gradle`.
+2. Run `gradle --init-script init.gradle rewriteRun` to run the recipe.
+3. Inspect the results.
+
+
 ## Roadmap
 
 Update instructions to show how to _build_ and _run_ with:
