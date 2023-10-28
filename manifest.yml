@@ -8,5 +8,5 @@ applications:
   instances: 1
   env:
     JAVA_OPTS: -Djava.security.egd=file:///dev/urandom
-    JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 17.+ } }'
+    JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 21.+ } }'
     JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{ enabled: false }'

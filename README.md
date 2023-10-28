@@ -1,7 +1,7 @@
 # Primes Service (Solution)
 
 This branch contains the solution to the challenge.
-The implementation has dependencies upon Spring Boot 3.1.x starters.
+The implementation has dependencies upon Spring Boot 3.2.x starters.
 
 ## The Challenge was...
 
@@ -31,27 +31,19 @@ Bonus points for authoring a Mock test that covers the Controller implementation
 ```
 git clone https://github.com/fastnsilver/primes.git
 cd primes
-git checkout solution
+git checkout 3.2
 ```
 
 
 ## Install prerequisites
 
 ```
-sdk install java 17.0.8.1-librca
 sdk install java 21-graalce
 sdk install gradle 8.4
 ```
 
 
 ## Set active JDK
-
-```
-sdk use java 17.0.8.1-librca
-```
-> Java 17
-
-or
 
 ```
 sdk use java 21-graalce
@@ -62,8 +54,9 @@ sdk use java 21-graalce
 ## How to Build
 
 ```
-gradle clean build
+gradle clean build -x processTestAot
 ```
+> AOT disabled in tests; @see https://github.com/mockito/mockito/issues/2435
 
 ### Alternative builds
 

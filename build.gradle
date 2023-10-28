@@ -1,5 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version '3.1.5'
+    id 'org.springframework.boot' version '3.2.0-RC1'
     id 'io.spring.dependency-management' version '1.1.3'
     id 'com.github.ben-manes.versions' version '0.49.0'
     id 'java'
@@ -9,6 +9,14 @@ plugins {
     id 'com.github.spotbugs' version '5.2.1'
     id 'info.solidsoft.pitest' version '1.15.0'
     id 'org.graalvm.buildtools.native' version '0.9.28'
+}
+
+graalvmNative {
+    binaries {
+        main {
+            buildArgs.add('--enable-preview')
+        }
+    }
 }
 
 spotbugs {
@@ -33,7 +41,7 @@ spotbugsMain {
 
 group = 'com.fns'
 version = '1.0-SNAPSHOT'
-sourceCompatibility = JavaVersion.VERSION_17
+sourceCompatibility = JavaVersion.VERSION_21
 
 repositories {
     mavenCentral()
@@ -60,6 +68,7 @@ test {
 }
 
 java {
+    toolchain { languageVersion = JavaLanguageVersion.of(21) }
     withJavadocJar()
     withSourcesJar()
 }
