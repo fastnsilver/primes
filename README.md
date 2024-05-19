@@ -38,15 +38,15 @@ git checkout 3.2
 ## Install prerequisites
 
 ```
-sdk install java 21-graalce
-sdk install gradle 8.4
+sdk install java 21.0.2-graalce
+sdk install gradle 8.7
 ```
 
 
 ## Set active JDK
 
 ```
-sdk use java 21-graalce
+sdk use java 21.0.2-graalce
 ```
 > GraalVM Community Edition, required for native image compilation
 
