@@ -1,7 +1,7 @@
 # Primes Service (Solution)
 
 This branch contains the solution to the challenge.
-The implementation has dependencies upon Spring Boot 3.2.x starters.
+The implementation has dependencies upon Spring Boot 3.4.x starters.
 
 ## The Challenge was...
 
@@ -31,32 +31,29 @@ Bonus points for authoring a Mock test that covers the Controller implementation
 ```
 git clone https://github.com/fastnsilver/primes.git
 cd primes
-git checkout 3.2
+git checkout 3.4
 ```
 
 
 ## Install prerequisites
 
 ```
-sdk install java 21.0.2-graalce
-sdk install gradle 8.7
+sdk install java 21.0.6-librca
+sdk install gradle 8.12
 ```
 
 
 ## Set active JDK
 
 ```
-sdk use java 21.0.2-graalce
+sdk use java 21.0.6-librca
 ```
-> GraalVM Community Edition, required for native image compilation
-
 
 ## How to Build
 
 ```
-gradle clean build -x processTestAot
+gradle clean build
 ```
-> AOT disabled in tests; @see https://github.com/mockito/mockito/issues/2435
 
 ### Alternative builds
 
@@ -69,13 +66,6 @@ gradle clean build -PisObserved
 ```
 > Export metrics and traces to Wavefront
 
-Native image (native)
-* uses [Spring AOT](https://docs.spring.io/spring-native/docs/current/reference/htmlsingle/#spring-aot-maven) to compile a native executable with [GraalVM](https://www.graalvm.org/docs/introduction/)
-
-```
-gradle nativeCompile
-```
-
 
 ## How to Run
 
@@ -86,20 +76,12 @@ gradle bootRun
 ```
 > Press Ctrl+c to stop
 
-With native image
-
-```
-./build/native/nativeCompile/primes
-```
-
-
 ## How to deploy
 
 to Tanzu Application Service
 
 ```
-cf push
-cf push primes-native -m 128m -c './build/native/nativeCompile/primes' -b binary_buildpack -s cflinuxfs4 --no-manifest
+cf push primes -m 512m -c './build/libs/primes-1.0-SNAPSHOT.jar
 ```
 
 ## How to teardown

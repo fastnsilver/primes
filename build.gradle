@@ -1,40 +1,12 @@
 plugins {
-    id 'org.springframework.boot' version '3.2.5'
-    id 'io.spring.dependency-management' version '1.1.5'
-    id 'com.github.ben-manes.versions' version '0.51.0'
+    id 'org.springframework.boot' version '3.4.2'
+    id 'io.spring.dependency-management' version '1.1.7'
+    id 'com.github.ben-manes.versions' version '0.52.0'
     id 'java'
     id 'jacoco'
-    id 'io.freefair.aggregate-jacoco-report' version '8.6'
-    id 'com.google.cloud.tools.jib' version '3.4.2'
-    id 'com.github.spotbugs' version '6.0.14'
+    id 'io.freefair.aggregate-jacoco-report' version '8.12.1'
+    id 'com.google.cloud.tools.jib' version '3.4.4'
     id 'info.solidsoft.pitest' version '1.15.0'
-    id 'org.graalvm.buildtools.native' version '0.10.2'
-}
-
-graalvmNative {
-    binaries {
-        main {
-            buildArgs.add('--enable-preview')
-        }
-    }
-}
-
-spotbugs {
-    ignoreFailures = true
-    showProgress = true
-}
-
-spotbugsMain {
-    reports {
-        html {
-            enabled = true
-            destination = file("$buildDir/reports/spotbugs/main/spotbugs.html")
-        }
-        xml {
-            enabled = true
-            destination = file("$buildDir/reports/spotbugs/main/spotbugs.xml")
-        }
-    }
 }
 
 group = 'com.fns'
@@ -72,7 +44,7 @@ java {
 }
 
 jacoco {
-    toolVersion = "0.8.11"
+    toolVersion = "0.8.12"
 }
 
 pitest {
@@ -85,16 +57,15 @@ pitest {
 
 dependencyManagement {
     imports {
-        mavenBom "com.wavefront:wavefront-spring-boot-bom:3.0.2"
+        mavenBom "com.wavefront:wavefront-spring-boot-bom:3.2.0"
     }
 }
 
 dependencies {
     implementation('org.springframework.boot:spring-boot-starter-actuator')
     implementation('org.springframework.boot:spring-boot-starter-web')
-    testImplementation('org.assertj:assertj-core:3.25.3')
+    testImplementation('org.assertj:assertj-core:3.27.3')
     testImplementation('org.springframework.boot:spring-boot-starter-test')
-    testImplementation('org.pitest:pitest-junit5-plugin:1.2.1')
     if (project.hasProperty("isObserved")) {
         runtimeOnly('com.wavefront:wavefront-spring-boot-starter')
         implementation('io.micrometer:micrometer-tracing-bridge-brave')
